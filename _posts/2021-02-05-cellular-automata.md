@@ -16,7 +16,7 @@ Might you have an include in your theme? Why not try it here!
 {% include my-themes-great-include.html %}
 {% endcomment %}
 
-![A 1080p image of a leopard with zoom on a subset of its pixels](/assets/images/leopard-zoom.jpg "A 1080p image of a leopard with zoom on a subset of its pixels")
+![A 1080p image of a leopard with zoom on a subset of its pixels](/assets/img/leopard-zoom.jpg "A 1080p image of a leopard with zoom on a subset of its pixels")
 <!-- <span>Photo by <a href="https://unsplash.com/@esu?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Adaivorukamuthan</a> on <a href="https://unsplash.com/s/photos/leopard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span> -->
 
 Based only on this local information, could you ever find out that you are part of a bigger leopard image? Certainly not! After all, that particular local information could be part of a cat's picture, a scarf, or even something else completely different.
