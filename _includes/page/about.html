@@ -1,0 +1,23 @@
+<div class="about">
+<div class="about__devider">*****</div>
+<div class="about__text">
+<strong> the simplest explanation is usually the correct one. </strong>
+<ul style="padding-left: 0px;">
+{% if site.author.email %}
+<a href="mailto:{{ site.author.email }}" class="social-links__entry" target="_blank" style="margin-left: 5px;margin-right: 5px;">
+<i class="fa fa-envelope-square"></i>
+</a>
+{% endif %}
+{% if site.author.github %}
+<a href="https://github.com/{{ site.author.github }}" class="social-links__entry" target="_blank" style="margin-left: 5px;margin-right: 5px;">
+<i class="fa fa-github"></i>
+</a>
+{% endif %}
+{% if site.author.linkedin %}
+<a href="https://in.linkedin.com/in/{{ site.author.linkedin }}" class="social-links__entry" target="_blank" style="margin-left: 5px;margin-right: 5px;">
+<i class="fa fa-linkedin"></i>
+</a>
+{% endif %}
+</ul>
+</div>
+</div>
