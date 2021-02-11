@@ -24,24 +24,27 @@ But first, it's worthwile explaining what are Cellular Automata.
 
 # From (simple) rules to (unpredictable) behavior
 
-Simple definition of a Cellular Automata
+A Cellular Automata can be generally described as a collection of cells, agents or pixels, whose states evolve according to a given rule. One important aspect of these systems is that all cells follow the same state-update rule. There are many types of Cellular Automata, but the goal of this post is not to describe them all. 
 
-But it's best to understand by two well known examples
+Instead it's best to understand them by two well known examples
 
-## Wolfram's simple one dimensional automata
+## Wolfram's Elementary Cellular Automata
 
-This is the simplest cellular automata. Cells (pixels) can only have binary values. and are one-dimensional
+This is arguably the simplest Cellular Automata. Cells (pixels) have binary states, evolve in discrete time, and interact in a one-dimensional space. In other words, you can imagine these pixels distributed along a line, and each having one of two colors (black or white). Furthermore, at each simulation time step, each pixel decides its new color depending on the color of its two immediate neighbors (as well as its own color).
 
-For this simple case, there are actually only # possible rules. Most of the rules are not interesting, but some get quite interesting. 
+In this simple case, there are actually $$2^{2^3}=256$$ possible rules and Stephen Wolfram analysed all of them. Most of the rules do not produce interesting behavior, but some get quite interesting. One such interesting rule was Rule 30, which can be expressed in the following image: 
 
-Rule 30 used for random number generator
+![](/assets/img/Rule30.gif "Rule 30 in Elementary Cellular Automata"){:.center-image}
 
-![](/assets/img/Rule30.gif "Gosper's glider gun shooting gliders"){:.center-image}
+This image shows in the top row all 8 possibilities of both a pixel color as well as its neighbours. And in the bottom row the rule defines what new color the middle pixel will become in the following time step.
 
-![](/assets/img/Rule30s.png "Gosper's glider gun shooting gliders"){:.center-image}
+Rule 30 is interesting because it gives rise to chaotic behavior. The image below shows the evolution (from top to bottom) when starting from a single black pixel in the middle. 
 
-Link More details
-Link try it out
+![](/assets/img/Rule30s.png "Rule 30 in action starting from a single black pixel"){:.center-image}
+
+Stephen noted that no pattern can be found in this evolution (can you spot any?), and even later used this fact to produce random numbers on his language *Mathematica*.
+
+If you want to learn more, you can check [here](https://mathworld.wolfram.com/ElementaryCellularAutomaton.html), and you can simulate this simle Cellular Automata [here](https://devinacker.github.io/celldemo/)
 
 ## Conway's Game of Life
 
