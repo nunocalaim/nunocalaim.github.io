@@ -36,27 +36,34 @@ For this simple case, there are actually only # possible rules. Most of the rule
 
 Rule 30 used for random number generator
 
+![](/assets/img/Rule30.gif "Gosper's glider gun shooting gliders"){:.center-image}
+
+![](/assets/img/Rule30s.png "Gosper's glider gun shooting gliders"){:.center-image}
+
 Link More details
 Link try it out
 
-## Conway's game of life
+## Conway's Game of Life
 
-Conway's game of life is a two dim version
+John Conway's Game of Life is a two dimensional binary cellular automata. This means that each cell can only be in either one of two states (alive or dead), and has 8 immediate neighbors (the 3x3 grid surrounding each cell). 
 
-Many rules could have been chosen, but John chose carefully
+In this case, there are _many_ possible rules ($$2^{2^9}$$ to be more precise), and most of them lead to very uninteresting results, but John chose the rules carefully:
 
 1. Any live cell with two or three live neighbours survives.
 1. Any dead cell with three live neighbours becomes a live cell.
 1. All other live cells die in the next generation. Similarly, all other dead cells stay dead.
 
-Link More details
-Link try it out
+With these simple rules, and depending on the initial conditions, the behaviour of the system becomes unpredictable and chaotic. Here is shown an example of such simulation where black and white represents an alive and dead cell respectivelly.
 
+![](/assets/img/CGL_Glider.gif "Gosper's glider gun shooting gliders"){:.center-image}
+
+
+If you want to learn more, I suggest you pay a visit to the [Wikipedia page](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). You can also experiment with it [here](https://playgameoflife.com/) or [here](https://copy.sh/life/)
 
 
 # From (desired) behavior to (learned) rules
 
-The prvious examples were carefully chosen rules, What is we can do the opposite?
+The previous examples were carefully chosen rules, What if we can do the opposite?
 
 Recent advances in Machine Learning has allowed end-to-end training 
 

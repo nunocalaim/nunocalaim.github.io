@@ -1,5 +1,10 @@
 @charset "UTF-8";
 /* =Base *//*************************************************************/
+  .center-image {
+      margin: 0 auto;
+      display: block;
+  }
+
   body {
     font-family: 'Quicksand', sans-serif;  
     font-size: 100%;
