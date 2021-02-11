@@ -90,13 +90,28 @@ Show a video of the agents performing the task
 
 Maybe explain Mutate Training, Random initialisation
 
+<video style="max-width:80%" controls="controls" class='center-image' loop autoplay>
+  <source src="/assets/videos/Movie_test_increase_CA_count_pixels_ClassB2_5_9_14_20_27_35_Modlmiddle_Channels4TimesClasses_AddNoise_InitRnd_MutTrain_200000.mp4">
+</video>
+
 ## XOR
+
+Before moving on to full image classification, I tried to see if these types of agents would be able to solve a simple XOR task. XOR (eXclusive OR) is a boolean operation that distinguishes whether two bits are the same or different. 
+
+In this case, I created 8 simple images consisting of full black pixels except for both extremities, where I would put either a vertical white bar or an horizontal one.
+
+
+To correctly solve an XOR task, one cannot focus only on one type 
 
 Explain the task, motivate why it's interesting
 
 Show how the model is different
 
 See it in action
+
+<video style="max-width:80%" controls="controls" class='center-image' loop autoplay>
+  <source src="/assets/videos/Movie_model_CA_xor_Sep5_Modlcomplex_ChannelsFiftyChannels_AddNoise_InitRnd_MutTrain_5000.mp4">
+</video>
 
 ## Fruit Classification
 
@@ -105,6 +120,12 @@ We tested also for simple image classification.
 Explain the task, why we lost colour
 
 Show the results
+
+<video style="max-width:80%" controls="controls" class='center-image' loop autoplay>
+  <source src="/assets/videos/Movie_model_CA_fruits_H20_W20_Modlmiddle_ChannelsFiftyChannels_AddNoise_InitRnd_20000.mp4">
+</video>
+
+## 1080p Image Classification
 
 # Conclusion
 
