@@ -98,40 +98,54 @@ Maybe explain Mutate Training, Random initialisation
 
 Before moving on to full image classification, I tried to see if these types of agents would be able to solve a simple XOR task. XOR (eXclusive OR) is a boolean operation that distinguishes whether two bits are the same or different. 
 
-In this case, I created 8 simple images consisting of full black pixels except for both extremities, where I would put either a vertical white bar or an horizontal one.
+In this case, I created 8 simple images: 4 short (3x10) images and 4 long (3x21) ones. Each of which consists of black pixels except at both extremities, where I would randomly place either a vertical, or a horizontal white bar.
 
+![](/assets/img/XORtask.jpg "8 input images to train the XOR task"){:.center-image}
 
-To correctly solve an XOR task, one cannot focus only on one type 
+The goal here is to classify these images as red if the white bars at the extremes have a different orientation and green if they are the same. This is a non-trivial, non-linear problem that cannot be solved just by looking at a particular part of the image. Thus I am forcing the agents to really get the information globally.
 
-Explain the task, motivate why it's interesting
+We can apply the same agent model and communication channels as before, but with only one minor difference: All pixels need to be considered 'alive' and able to communicate with their neighbours.
 
-Show how the model is different
+When I trained the model on the short images, the agents found a clever communication strategy to collectively agree on the correct class ad reach an accuracy of 100%. However, the model was not able to learn any strategy if only trained on the long images. Nonetheless, we don't need to train the model on the long images, we can simply use the strategy found for the short images and apply it to the long ones. You can check the results in the next video.
 
-See it in action
-
-<video style="max-width:80%" controls="controls" class='center-image' loop autoplay>
+<video style="width:85%" controls="controls" class='center-image' loop autoplay>
   <source src="/assets/videos/Movie_model_CA_xor_Sep5_Modlcomplex_ChannelsFiftyChannels_AddNoise_InitRnd_MutTrain_5000.mp4">
 </video>
 
+We can see that the strategy found with the short images is correct and capable to generalise to longer images. In other words, the agents really found a way to communicate the important information.
+
+If you want to try this task just set the variable ```task = 'xor'``` on the collab notebook found on Github
+
 ## Fruit Classification
 
-We tested also for simple image classification.
+Having shown that our agents were able to solve the XOR task on small images, we test them in a more complicated image classification task: fruit classification.
 
-Explain the task, why we lost colour
+We collected a dataset consisting in several pictures of apples, oranges and bananas. Since our goal is to build local agents that collectively decide on global information, we cannot preserve the color of the fruits as this is a local property that is highly correlated with each category. Therefore we turned all pictures into grayscale, forcing the agents to find a strategy that requires good communication strategies.
 
-Show the results
+After training, we tested the agents with a different set of fruit images, and found that the agents were able to correctly identify the fruit in all of the cases.
 
 <video style="max-width:80%" controls="controls" class='center-image' loop autoplay>
   <source src="/assets/videos/Movie_model_CA_fruits_H20_W20_Modlmiddle_ChannelsFiftyChannels_AddNoise_InitRnd_20000.mp4">
 </video>
 
+One surprising result seen in the above video is that the agents don't necessarily start to classify the image on the location of the fruit, but sometimes away from the fruit location in the picture.
+
+As usual, you can try this task by setting the variable ```task = 'fruits'``` on the collab notebook found on Github.
+
 ## 1080p Image Classification
+
+Even though the Cellular Automata were successfull in classifying these simple toy problems, porting these ideas to classify general images, with much higher resolutions, and belonging to many more categories remains a very challenging task. In principle one should be able to make it work by increasing the number of neighbour pixels that are allowed to communicate with each pixel, but unfortunately doing so exhausts our computation resources and takes a very long training time.
+
+Having thought about this problem I believe that adding hierarchy to Cellular Automata may allow them to solve this more general task. I believe that, since natural images have the scale-free property, one could save computational resources by considering iteractively Cellular Automata at different spacial resolutions. But this, I feel, is much more than a small side project
 
 # Conclusion
 
-Neural networks vs Cellular Automata
+Neural Networks share some of the properties of Cellular Automata. Both consist of simple units, organised in a specific way. The main difference is that in Cellular Automata each agent is following the same global rule, whereas in Neural Nets, each unit is allowed to perform a different computation. This explains why they are more powerfull.
 
 # Credits
 
-Distill
+This work was inspired by work performed by ...
+My collaborator Adrien Jouary helped me in this project with cool ideas and discussion
+The leopard image is bla, the automata is ble, bli.
+
 
