@@ -9,21 +9,16 @@ categories: ["general"]
 
 Here we study how individual agents with local information can collectively perform a global task. 
 
-Consider this simple example: you are a single pixel in an 1080p picture of a leopard, you know your color, intensity and let's assume you can also see the same information about your immediate neighbours (picture the 3x3 neighborhood of pixels centered around you). 
-
-{% comment %}
-Might you have an include in your theme? Why not try it here!
-{% include my-themes-great-include.html %}
-{% endcomment %}
+Consider this simple example: you are a single pixel in an 1080p picture of a leopard, you know your color, intensity and let's assume you can also see the same information about your immediate neighbours (the 3x3 neighborhood of pixels centered around you shown in the image below). 
 
 ![A 1080p image of a leopard with zoom on a subset of its pixels](/assets/img/leopard-zoom.jpg "A 1080p image of a leopard with zoom on a subset of its pixels")
 <!-- <span>Photo by <a href="https://unsplash.com/@esu?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Adaivorukamuthan</a> on <a href="https://unsplash.com/s/photos/leopard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span> -->
 
 Based only on this local information, could you ever find out that you are part of a bigger leopard image? Certainly not! After all, that particular local information could be part of a cat's picture, a scarf, or even something else completely different.
 
-But what if all the pixels can get together and devise a clever strategy to communicate with each other to reach consensus on what the full image is all about? Is there even such a communication strategy? 
+But what if all the pixels could get together and devise a clever strategy to communicate with each other to reach consensus on what the full image is all about? Is there even such a communication strategy? 
 
-Instead of designing ourselves this strategy we allow it to be automatically learned with the tools of deep learning.
+In this project, instead of designing ourselves this strategy, we allow it to be automatically learned with the tools of deep learning.
 
 But first, it's worthwile explaining what are Cellular Automata.
 
@@ -46,6 +41,10 @@ Link try it out
 
 ## Conway's game of life
 
+Conway's game of life is a two dim version
+
+Many rules could have been chosen, but John chose carefully
+
 1. Any live cell with two or three live neighbours survives.
 1. Any dead cell with three live neighbours becomes a live cell.
 1. All other live cells die in the next generation. Similarly, all other dead cells stay dead.
@@ -53,11 +52,17 @@ Link try it out
 Link More details
 Link try it out
 
+
+
 # From (desired) behavior to (learned) rules
+
+The prvious examples were carefully chosen rules, What is we can do the opposite?
 
 Recent advances in Machine Learning has allowed end-to-end training 
 
 We expand the state of each automata with communication channels
+
+IMAGE HERE
 
 One type of deep net, the convolutional neural network is suited for cellular automata if we consider filters of size 3x3 in the first layer and 1x1 in the subsequent layers.
 
