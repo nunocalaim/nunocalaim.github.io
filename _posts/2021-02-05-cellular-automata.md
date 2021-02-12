@@ -139,7 +139,7 @@ One surprising result seen in the above video is that the agents don't necessari
 
 As usual, you can try this task by setting the variable ```task = 'fruits'``` on the collab notebook found on Github.
 
-### 1080p Image Classification
+### High-resolution Image Classification
 
 Even though the Cellular Automata were successfull in classifying these simple toy problems, porting these ideas to classify general images, with much higher resolutions, and belonging to many more categories remains a very challenging task. In principle one should be able to make it work by increasing the number of neighbour pixels that are allowed to communicate with each pixel, but unfortunately doing so exhausts our computation resources and takes a very long training time.
 
