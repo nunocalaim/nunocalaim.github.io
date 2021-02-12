@@ -34,13 +34,13 @@ This is arguably the simplest Cellular Automata. Cells (pixels) have binary stat
 
 In this simple case, there are actually $$2^{2^3}=256$$ possible rules and Stephen Wolfram analysed all of them. Most of the rules do not produce interesting behavior, but some get quite interesting. One such interesting rule was Rule 30, which can be expressed in the following image: 
 
-![](/assets/img/Rule30.gif "Rule 30 in Elementary Cellular Automata"){:.center-image}
+![The definition of Rule 30](/assets/img/Rule30.gif "Rule 30 in Elementary Cellular Automata"){:.center-image}
 
 This image shows in the top row all 8 possibilities of both a pixel color as well as its neighbours. And in the bottom row the rule defines what new color the middle pixel will become in the following time step.
 
 Rule 30 is interesting because it gives rise to chaotic behavior. The image below shows the evolution (from top to bottom) when starting from a single black pixel in the middle. 
 
-![](/assets/img/Rule30s.png "Rule 30 in action starting from a single black pixel"){:.center-image}
+![An image showing the temporal evolution of Rule 30](/assets/img/Rule30s.png "Rule 30 in action starting from a single black pixel"){:.center-image}
 
 Stephen noted that no pattern can be found in this evolution (can you spot any?), and even later used this fact to produce random numbers on his language *Mathematica*.
 
@@ -58,11 +58,9 @@ In this case, there are _many_ possible rules ($$2^{2^9}$$ to be more precise), 
 
 With these simple rules, and depending on the initial conditions, the behaviour of the system becomes unpredictable and chaotic. Here is shown an example of such simulation where black and white represents an alive and dead cell respectivelly.
 
-![](/assets/img/CGL_Glider.gif "Gosper's glider gun shooting gliders"){:.center-image}
-
+![A gif image of Gosper's glider gun shooting gliders](/assets/img/CGL_Glider.gif "Gosper's glider gun shooting gliders"){:.center-image}
 
 If you want to learn more, I suggest you pay a visit to the [Wikipedia page](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). You can also experiment with it [here](https://playgameoflife.com/) or [here](https://copy.sh/life/)
-
 
 # From (desired) behavior to (learned) rules
 
@@ -76,23 +74,33 @@ IMAGE HERE
 
 One type of deep net, the convolutional neural network is suited for cellular automata if we consider filters of size 3x3 in the first layer and 1x1 in the subsequent layers.
 
-We then train the weights of the conv2d with backpropagation.
-
-We can use tensorflow to do this and the code is online.
-
-In this work we start with a simpler problem. Count digits
+We then train the weights of the conv2d with backpropagation using tensorflow to do this and the code is online.
 
 ## Count Digits
 
-Explain the task, motivate why it's interesting
+We ask the simple question: can a group of pixels collectively decide how many of them are alive? This conceptual task may have implications reaching further than simple arithmetic. The ability to know how much copies there are may prove crucial for a developing biological organ to know when to stop or continuing cell division.
 
-Show a video of the agents performing the task
+We presented this task to an image of dead and alive pixels. Specifically our goal was for the agents to collectively reach a consensus on how many pixels they formed based in the following color-coded categories:
 
-Maybe explain Mutate Training, Random initialisation
+![The color-code used for the Counting Pixels task](/assets/img/CP_colors.jpg "The color-code used for the Counting Pixels task"){:.center-image width="200"}
+
+Note that, although it is simple for agents to see when only one, two or three pixels are present (because they can see the 3x3 neighborhood), it is a much more challenging task to correctly distinguish between 30 or 35 pixels.
+
+Indeed throughout the training period we see that the model begins by learning the class with the smallest number of pixels and gradually learns the subsequent classes. 
+
+After training finalised, we tested the resulting Cellular Automata with novel unseen images. 
+
+<video style="max-width:80%" controls="controls" class='center-image' loop autoplay>
+  <source src="/assets/videos/Movie_model_CA_count_pixels_ClassB2_5_9_14_20_27_35_Modlmiddle_Channels4TimesClasses_AddNoise_InitRnd_MutTrain_200000.mp4">
+</video>
+
+The previous video demonstrated that the agents learned to correctly classify each image according to the number of pixels it contained. We further tested them with images with an increasing and decreasing number of pixels 
 
 <video style="max-width:80%" controls="controls" class='center-image' loop autoplay>
   <source src="/assets/videos/Movie_test_increase_CA_count_pixels_ClassB2_5_9_14_20_27_35_Modlmiddle_Channels4TimesClasses_AddNoise_InitRnd_MutTrain_200000.mp4">
 </video>
+
+If you want to try out this task just set the variable ```task = 'count_digits'``` on the collab notebook found on Github
 
 ## XOR
 
@@ -100,7 +108,7 @@ Before moving on to full image classification, I tried to see if these types of 
 
 In this case, I created 8 simple images: 4 short (3x10) images and 4 long (3x21) ones. Each of which consists of black pixels except at both extremities, where I would randomly place either a vertical, or a horizontal white bar.
 
-![](/assets/img/XORtask.jpg "8 input images to train the XOR task"){:.center-image}
+![](/assets/img/XORtask.jpg "8 input images to train the XOR task"){:.center-image width="230"}
 
 The goal here is to classify these images as red if the white bars at the extremes have a different orientation and green if they are the same. This is a non-trivial, non-linear problem that cannot be solved just by looking at a particular part of the image. Thus I am forcing the agents to really get the information globally.
 
