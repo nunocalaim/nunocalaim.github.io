@@ -9,10 +9,9 @@ categories: ["general"]
 
 Here we study how individual agents with local information can collectively perform a global task. 
 
-Consider this simple example: you are a single pixel in an 1080p picture of a leopard, you know your color, intensity and let's assume you can also see the same information about your immediate neighbours (the 3x3 neighborhood of pixels centered around you shown in the image below). 
+Consider this simple example: you are a single pixel in a high resolution picture of a leopard. Furthermore, assume that you only know your pixel value as well as those of your immediate neighbours (the 3x3 neighborhood of pixels centered around you shown in the image below). 
 
-![A 1080p image of a leopard with zoom on a subset of its pixels](/assets/img/leopard-zoom.jpg "A 1080p image of a leopard with zoom on a subset of its pixels")
-<!-- <span>Photo by <a href="https://unsplash.com/@esu?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Adaivorukamuthan</a> on <a href="https://unsplash.com/s/photos/leopard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span> -->
+![An image of a leopard with zoom on a subset of its pixels](/assets/img/leopard-zoom.jpg "An image of a leopard with zoom on a subset of its pixels")
 
 Based only on this local information, could you ever find out that you are part of a bigger leopard image? Certainly not! After all, that particular local information could be part of a cat's picture, a scarf, or even something else completely different.
 
@@ -20,13 +19,13 @@ But what if all the pixels could get together and devise a clever strategy to co
 
 In this project, instead of designing ourselves this strategy, we allow it to be automatically learned with the tools of deep learning.
 
-But first, it's worthwile explaining what are Cellular Automata.
+But first, it's worthwile explaining what Cellular Automata are.
 
 # From (simple) rules to (unpredictable) behavior
 
-A Cellular Automata can be generally described as a collection of cells, agents or pixels, whose states evolve according to a given rule. One important aspect of these systems is that all cells follow the same state-update rule. There are many types of Cellular Automata, but the goal of this post is not to describe them all. 
+A Cellular Automata can be generally described as a collection of cells, agents or pixels, whose states evolve according to a given rule. One important aspect of these systems is that all cells follow the exact same state-update rule.
 
-Instead it's best to understand them by two well known examples
+There are many types of Cellular Automata, and the goal of this post is not to describe them all. Instead it's best to understand them by two well known examples:
 
 ### Wolfram's Elementary Cellular Automata
 
