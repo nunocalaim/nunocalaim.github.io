@@ -28,7 +28,7 @@ A Cellular Automata can be generally described as a collection of cells, agents 
 
 Instead it's best to understand them by two well known examples
 
-## Wolfram's Elementary Cellular Automata
+### Wolfram's Elementary Cellular Automata
 
 This is arguably the simplest Cellular Automata. Cells (pixels) have binary states, evolve in discrete time, and interact in a one-dimensional space. In other words, you can imagine these pixels distributed along a line, and each having one of two colors (black or white). Furthermore, at each simulation time step, each pixel decides its new color depending on the color of its two immediate neighbors (as well as its own color).
 
@@ -46,7 +46,7 @@ Stephen noted that no pattern can be found in this evolution (can you spot any?)
 
 If you want to learn more, you can check [here](https://mathworld.wolfram.com/ElementaryCellularAutomaton.html), and you can simulate this simle Cellular Automata [here](https://devinacker.github.io/celldemo/)
 
-## Conway's Game of Life
+### Conway's Game of Life
 
 John Conway's Game of Life is a two dimensional binary cellular automata. This means that each cell can only be in either one of two states (alive or dead), and has 8 immediate neighbors (the 3x3 grid surrounding each cell). 
 
@@ -64,19 +64,19 @@ If you want to learn more, I suggest you pay a visit to the [Wikipedia page](htt
 
 # From (desired) behavior to (learned) rules
 
-The previous examples were carefully chosen rules, What if we can do the opposite?
+In the previous examples of Cellular Automata we have seen how starting from rules, one can get interesting behavior. What if we can do the opposite? We specify the final behaviour and ask what rules give rise to it?
 
-Recent advances in Machine Learning has allowed end-to-end training 
+Recent advances in Machine Learning have popularized end-to-end training methods. We can thus use these tools to automatically find rules that allow Cellular Automata to classify images. 
 
-We expand the state of each automata with communication channels
+To do so we need to expand each pixel with a set of channels that serve as communication between cells. We also reserve some of the channels for the current voting decision.
 
-IMAGE HERE
+![](/assets/img/model.jpg "The state space of the Cellular Automata"){:.center-image width="300"}
 
-One type of deep net, the convolutional neural network is suited for cellular automata if we consider filters of size 3x3 in the first layer and 1x1 in the subsequent layers.
+This means that each cell observes its neighbors pixel values as well as all their corresponding communication and voting channels, and decides how to update its own communication and voting channels.
 
-We then train the weights of the conv2d with backpropagation using tensorflow to do this and the code is online.
+This process can be easily implemented with a type of Neural Network: a Convolutional Neural Network (CNN). Details of the implementation can be found on the [GitHub repo of this project](https://github.com/nunocalaim/CellularAutomata), where we use Tensorflow to build a custom model and train it with automatic differentiation using ADAM optimiser.
 
-## Count Digits
+### Count Digits
 
 We ask the simple question: can a group of pixels collectively decide how many of them are alive? This conceptual task may have implications reaching further than simple arithmetic. The ability to know how much copies there are may prove crucial for a developing biological organ to know when to stop or continuing cell division.
 
@@ -102,7 +102,7 @@ The previous video demonstrated that the agents learned to correctly classify ea
 
 If you want to try out this task just set the variable ```task = 'count_digits'``` on the collab notebook found on Github
 
-## XOR
+### XOR
 
 Before moving on to full image classification, I tried to see if these types of agents would be able to solve a simple XOR task. XOR (eXclusive OR) is a boolean operation that distinguishes whether two bits are the same or different. 
 
@@ -124,7 +124,7 @@ We can see that the strategy found with the short images is correct and capable 
 
 If you want to try this task just set the variable ```task = 'xor'``` on the collab notebook found on Github
 
-## Fruit Classification
+### Fruit Classification
 
 Having shown that our agents were able to solve the XOR task on small images, we test them in a more complicated image classification task: fruit classification.
 
@@ -140,7 +140,7 @@ One surprising result seen in the above video is that the agents don't necessari
 
 As usual, you can try this task by setting the variable ```task = 'fruits'``` on the collab notebook found on Github.
 
-## 1080p Image Classification
+### 1080p Image Classification
 
 Even though the Cellular Automata were successfull in classifying these simple toy problems, porting these ideas to classify general images, with much higher resolutions, and belonging to many more categories remains a very challenging task. In principle one should be able to make it work by increasing the number of neighbour pixels that are allowed to communicate with each pixel, but unfortunately doing so exhausts our computation resources and takes a very long training time.
 
@@ -152,8 +152,11 @@ Neural Networks share some of the properties of Cellular Automata. Both consist 
 
 # Credits
 
-This work was inspired by work performed by ...
-My collaborator Adrien Jouary helped me in this project with cool ideas and discussion
-The leopard image is bla, the automata is ble, bli.
+This project was inspired by the [Thread: Differentiable Self-organizing Systems](https://distill.pub/2020/selforg/), Adrien Jouary helped me in this project with cool ideas, discussion and even datasets to test. The leopard image was taken by <a href="https://unsplash.com/@esu?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Adaivorukamuthan</a> on <a href="https://unsplash.com/s/photos/leopard?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a>.
+
+# Useful links
+
+1. [GitHub repo](https://github.com/nunocalaim/CellularAutomata) of this project
+1. [Google Collab](https://colab.research.google.com/drive/1Paeav1ZzWie_DKAfkF7nx-5CGGc1qgBA?usp=sharing) for training model for counting digits.
 
 
