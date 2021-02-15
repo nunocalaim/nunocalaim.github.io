@@ -73,7 +73,7 @@ To do so we need to expand each pixel with a set of channels that serve as commu
 
 This means that each cell observes its neighbors pixel values as well as all their corresponding communication and voting channels, and decides how to update its own communication and voting channels.
 
-This process can be readily implemented with a type of Neural Network: a Convolutional Neural Network (CNN). Details of the implementation can be found on the [GitHub repo of this project](https://github.com/nunocalaim/CellularAutomata), where we use Tensorflow to build a custom model and train it with automatic differentiation using ADAM optimiser.
+This process can be readily implemented with a type of Neural Network: a Convolutional Neural Network (CNN). Details of the implementation can be found on the [GitHub repo of this project](https://github.com/nunocalaim/CellularAutomata), where we use [Tensorflow](https://www.tensorflow.org/) to build a custom model and train it with [automatic differentiation](https://www.youtube.com/watch?v=wG_nF1awSSY) using [ADAM optimiser](https://towardsdatascience.com/a-visual-explanation-of-gradient-descent-methods-momentum-adagrad-rmsprop-adam-f898b102325c).
 
 ### Count Digits
 
