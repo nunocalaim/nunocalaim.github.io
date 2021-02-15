@@ -9,7 +9,7 @@ categories: ["general"]
 
 Here we study how individual agents with local information can collectively perform a global task. 
 
-Consider this simple example: you are a single pixel in a high resolution picture of a leopard. Furthermore, assume that you only know your pixel value as well as those of your immediate neighbours (the 3x3 neighborhood of pixels centered around you shown in the image below). 
+Consider this simple example: you are a single pixel in a high resolution picture of a leopard. Furthermore, assume that you only know your pixel value as well as those of your immediate neighbours (the 3x3 neighborhood of pixels centered around you as shown in the image below). 
 
 ![An image of a leopard with zoom on a subset of its pixels](/assets/img/leopard-zoom.jpg "An image of a leopard with zoom on a subset of its pixels")
 
@@ -25,17 +25,17 @@ But first, it's worthwile explaining what Cellular Automata are.
 
 A Cellular Automata can be generally described as a collection of cells, agents or pixels, whose states evolve according to a given rule. One important aspect of these systems is that all cells follow the exact same state-update rule.
 
-There are many types of Cellular Automata, and the goal of this post is not to describe them all. Instead it's best to understand them by two well known examples:
+Although there are many types of Cellular Automata, the goal of this post is not to describe them all. Instead it's best to understand them by two well known examples:
 
 ### Wolfram's Elementary Cellular Automata
 
-This is arguably the simplest Cellular Automata. Cells (pixels) have binary states, evolve in discrete time, and interact in a one-dimensional space. In other words, you can imagine these pixels distributed along a line, and each having one of two colors (black or white). Furthermore, at each simulation time step, each pixel decides its new color depending on the color of its two immediate neighbors (as well as its own color).
+This is arguably the simplest Cellular Automata. Cells (pixels) have binary states, evolve in discrete time, and interact in a one-dimensional space. In other words, you can imagine these pixels distributed along a line, and each having one of two colors (black or white). Furthermore, at each simulation time step, each pixel decides its new color based on a fixed rule that depends on its own color, as well as the color of its two immediate neighbors.
 
-In this simple case, there are actually $$2^{2^3}=256$$ possible rules and Stephen Wolfram analysed all of them. Most of the rules do not produce interesting behavior, but some get quite interesting. One such interesting rule was Rule 30, which can be expressed in the following image: 
+In this simple case, there are actually $$2^{2^3}=256$$ possible rules and Stephen Wolfram analysed each one of them. Most rules do not produce interesting behavior, but some get quite interesting. One such interesting rule was Rule 30, which can be expressed in the following image: 
 
 ![The definition of Rule 30](/assets/img/Rule30.gif "Rule 30 in Elementary Cellular Automata"){:.center-image}
 
-This image shows in the top row all 8 possibilities of both a pixel color as well as its neighbours. And in the bottom row the rule defines what new color the middle pixel will become in the following time step.
+This image shows all the 8 different color combinations for any given pixel and its 2 neighbours (top row), and then defines what new color the center pixel (bottom row) must become in the following time step.
 
 Rule 30 is interesting because it gives rise to chaotic behavior. The image below shows the evolution (from top to bottom) when starting from a single black pixel in the middle. 
 
@@ -43,13 +43,13 @@ Rule 30 is interesting because it gives rise to chaotic behavior. The image belo
 
 Stephen noted that no pattern can be found in this evolution (can you spot any?), and even later used this fact to produce random numbers on his language *Mathematica*.
 
-If you want to learn more, you can check [here](https://mathworld.wolfram.com/ElementaryCellularAutomaton.html), and you can simulate this simle Cellular Automata [here](https://devinacker.github.io/celldemo/)
+If you want to learn more and see other rules in action, you can check [here](https://mathworld.wolfram.com/ElementaryCellularAutomaton.html), and better yet, you can simulate this simle Cellular Automata online [here](https://devinacker.github.io/celldemo/).
 
 ### Conway's Game of Life
 
-John Conway's Game of Life is a two dimensional binary cellular automata. This means that each cell can only be in either one of two states (alive or dead), and has 8 immediate neighbors (the 3x3 grid surrounding each cell). 
+John Conway's Game of Life is a two dimensional binary cellular automata. This means, as before, that each cell can only be in either one of two states (alive/dead, or black/white), and has 8 immediate neighbors (the 3x3 grid surrounding each cell). 
 
-In this case, there are _many_ possible rules ($$2^{2^9}$$ to be more precise), and most of them lead to very uninteresting results, but John chose the rules carefully:
+In this case, there are _many_ possible rules ($$2^{2^9}$$ to be more precise), and most of them lead to very uninteresting results, but after much pondering and trial and error, John designed the rules as follows:
 
 1. Any live cell with two or three live neighbours survives.
 1. Any dead cell with three live neighbours becomes a live cell.
@@ -67,17 +67,17 @@ In the previous examples of Cellular Automata we have seen how starting from rul
 
 Recent advances in Machine Learning have popularized end-to-end training methods. We can thus use these tools to automatically find rules that allow Cellular Automata to classify images. 
 
-To do so we need to expand each pixel with a set of channels that serve as communication between cells. We also reserve some of the channels for the current voting decision.
+To do so we need to expand each pixel with a set of channels that serve as communication between cells. We also reserve some of these channels for the current voting decision.
 
 ![](/assets/img/model.jpg "The state space of the Cellular Automata"){:.center-image width="300"}
 
 This means that each cell observes its neighbors pixel values as well as all their corresponding communication and voting channels, and decides how to update its own communication and voting channels.
 
-This process can be easily implemented with a type of Neural Network: a Convolutional Neural Network (CNN). Details of the implementation can be found on the [GitHub repo of this project](https://github.com/nunocalaim/CellularAutomata), where we use Tensorflow to build a custom model and train it with automatic differentiation using ADAM optimiser.
+This process can be readily implemented with a type of Neural Network: a Convolutional Neural Network (CNN). Details of the implementation can be found on the [GitHub repo of this project](https://github.com/nunocalaim/CellularAutomata), where we use Tensorflow to build a custom model and train it with automatic differentiation using ADAM optimiser.
 
 ### Count Digits
 
-We ask the simple question: can a group of pixels collectively decide how many of them are alive? This conceptual task may have implications reaching further than simple arithmetic. The ability to know how much copies there are may prove crucial for a developing biological organ to know when to stop or continuing cell division.
+With this model and learning method we ask the simple question: can a group of pixels collectively decide how many of them are alive? This conceptual task may have implications reaching further than simple arithmetic. The ability to know how much copies there are may prove crucial for a developing biological organ to know when to stop or continuing cell division.
 
 We presented this task to an image of dead and alive pixels. Specifically our goal was for the agents to collectively reach a consensus on how many pixels they formed based in the following color-coded categories:
 
@@ -113,7 +113,7 @@ The goal here is to classify these images as red if the white bars at the extrem
 
 We can apply the same agent model and communication channels as before, but with only one minor difference: All pixels need to be considered 'alive' and able to communicate with their neighbours.
 
-When I trained the model on the short images, the agents found a clever communication strategy to collectively agree on the correct class ad reach an accuracy of 100%. However, the model was not able to learn any strategy if only trained on the long images. Nonetheless, we don't need to train the model on the long images, we can simply use the strategy found for the short images and apply it to the long ones. You can check the results in the next video.
+When I trained the model on the short images, the agents found a clever communication strategy to collectively agree on the correct class and reach an accuracy of 100%. However, the model was not able to learn any strategy if only trained on the long images (At least, it did not learn after a very long training time!). Nonetheless, we actually don't need to train the model on the long images, we can simply use the strategy found for the short images and apply it to the long ones. You can check the results in the next video.
 
 <video style="width:85%" controls="controls" class='center-image' loop autoplay>
   <source src="/assets/videos/Movie_model_CA_xor_Sep5_Modlcomplex_ChannelsFiftyChannels_AddNoise_InitRnd_MutTrain_5000.mp4">
